@@ -17,6 +17,15 @@ namespace ColbyWatersSite.Controllers
     {
       return View();
     }
+    public IActionResult References()
+    {
+      return View();
+    }
+    public IActionResult ScamsToAvoid()
+    {
+      return View();
+    }
+
 
     public IActionResult Privacy()
     {
