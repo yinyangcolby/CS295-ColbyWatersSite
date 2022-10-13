@@ -28,6 +28,16 @@ namespace ColbyWatersSite.Controllers
       return View();
     }
 
+    public IActionResult References()
+    {
+      return View();
+    }
+
+    public IActionResult ScamsToAvoid()
+    {
+      return View();
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
