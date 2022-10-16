@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using PeopleList;
 
 namespace ColbyWatersSite.Controllers
 {
@@ -18,8 +19,24 @@ namespace ColbyWatersSite.Controllers
       _logger = logger;
     }
 
+    [HttpGet]
     public IActionResult Index()
     {
+      List<ProfileModel> people = PeopleDB.GetPeople();
+      ViewBag.people = people;
+      return View();
+    }
+    [HttpPost]
+    public IActionResult Index(ProfileModel model)
+    {
+
+      if (ModelState.IsValid)
+      {
+        PeopleDB.AddPerson(model);
+        PeopleDB.SavePeople();
+      }
+      List<ProfileModel> people = PeopleDB.GetPeople();
+      ViewBag.people = people;
       return View();
     }
 

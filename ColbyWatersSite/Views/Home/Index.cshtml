@@ -1,7 +1,65 @@
-﻿@{
+﻿@model ProfileModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <p>Welcome to AvoidScams.info, an informational website dedicated to informing laymen internet surfers of common scams and phishing you should always avoid. </p>
+    <p>Welcome to AvoidScams.info, an informational website dedicated to informing laymen internet surfers of common scams and phishing you should always avoid. Please leave your feedback below!</p>
 </div>
+
+    <form asp-action="Index" method="post">
+        <table>
+            <tr>
+                <td>Name: </td>
+                <!--padding-->
+                <td class="p-2"><input asp-for="Name" /></td>
+            </tr>
+            <tr>
+                <td>Rating (1-10): </td>
+                <td class="p-2"><input style="width: 50px" asp-for="Rating" /></td>
+            </tr>
+            <tr>
+                <td>Comment: </td>
+                <td class="p-2"><textarea asp-for="Comment"></textarea></td>
+            </tr>
+        </table>
+        <!--button-->
+        <button type="submit" class="btn btn-success">Add Comment</button>
+    </form>
+
+    <hr />
+
+    <div class="container">
+        <!--row-->
+        <div class="row">
+            <!--column-->
+            <div class="col-sm">
+                Name
+            </div>
+            <div class="col-sm">
+                Rating
+            </div>
+            <div class="col-sm">
+                Comment
+            </div>
+        </div>
+    </div><br />
+
+    @foreach (ProfileModel person in (List<ProfileModel>)ViewBag.people)
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    @person.Name
+                </div>
+                <div class="col-sm">
+                    @person.Rating / 10
+                </div>
+                <div class="col-sm">
+                    @person.Comment
+                </div>
+            </div>
+        </div>
+        <br />
+    }
+    <hr/>
