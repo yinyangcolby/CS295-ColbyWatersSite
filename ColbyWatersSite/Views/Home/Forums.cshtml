@@ -2,64 +2,94 @@
 @{
     ViewData["Title"] = "Forums";
 }
-<h1>@ViewData["Title"]</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ColbyWatersSite</title>
+    <style></style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AvoidScams.info</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-<p>Use this page to detail your site's forums.</p>
+            </div>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Overview">Overview</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <p>Welcome to the forums. Feel free to leave your feedback and/or discuss things here.</p>
+    <form asp-action="Forums" method="post">
+        <table>
+            <tr>
+                <td>Name: </td>
+                <!--padding-->
+                <td class="p-2"><input asp-for="Name" /></td>
+            </tr>
+            <tr>
+                <td>Rating (1-10): </td>
+                <td class="p-2"><input style="width: 50px" asp-for="Rating" /></td>
+            </tr>
+            <tr>
+                <td>Comment: </td>
+                <td class="p-2"><textarea asp-for="Comment"></textarea></td>
+            </tr>
+        </table>
+        <!--button-->
+        <button type="submit" class="btn btn-success">Add Comment</button>
+    </form>
 
-<form asp-action="Forums" method="post">
-    <table>
-        <tr>
-            <td>Name: </td>
-            <!--padding-->
-            <td class="p-2"><input asp-for="Name" /></td>
-        </tr>
-        <tr>
-            <td>Rating (1-10): </td>
-            <td class="p-2"><input style="width: 50px" asp-for="Rating" /></td>
-        </tr>
-        <tr>
-            <td>Comment: </td>
-            <td class="p-2"><textarea asp-for="Comment"></textarea></td>
-        </tr>
-    </table>
-    <!--button-->
-    <button type="submit" class="btn btn-success">Add Comment</button>
-</form>
+    <hr />
 
-<hr />
-
-<div class="container">
-    <!--row-->
-    <div class="row">
-        <!--column-->
-        <div class="col-sm">
-            Name
-        </div>
-        <div class="col-sm">
-            Rating
-        </div>
-        <div class="col-sm">
-            Comment
-        </div>
-    </div>
-</div>
-<br />
-
-@foreach (ProfileModel person in (List<ProfileModel>)ViewBag.people)
-{
     <div class="container">
+        <!--row-->
         <div class="row">
+            <!--column-->
             <div class="col-sm">
-                @person.Name
+                Name
             </div>
             <div class="col-sm">
-                @person.Rating / 10
+                Rating
             </div>
             <div class="col-sm">
-                @person.Comment
+                Comment
             </div>
         </div>
     </div>
     <br />
-}
-<hr />
+
+    @foreach (ProfileModel person in (List<ProfileModel>)ViewBag.people)
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    @person.Name
+                </div>
+                <div class="col-sm">
+                    @person.Rating / 10
+                </div>
+                <div class="col-sm">
+                    @person.Comment
+                </div>
+            </div>
+        </div>
+        <br />
+    }
+    <hr />
+
+</body>
+</html>
