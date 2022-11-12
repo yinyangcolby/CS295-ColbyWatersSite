@@ -1,0 +1,27 @@
+﻿@model QuizModel
+
+@{ ViewData["Title"] = "Quiz"; }
+
+<div class="text-center">
+    <h1 class="display-4">Quiz</h1>
+</div>
+
+<div>
+    <h3>Question @ViewBag.Qid: @ViewBag.Question</h3>
+    <form asp-action="Quiz" method="post">
+        <!--Qid and Score values are saved here since QuizModels do not persist when the page is
+            reloaded. They are still passed into the HttpPost method to be updated.-->
+        <input type="hidden" asp-for="Qid" value="@ViewBag.Qid" />
+        <input type="hidden" asp-for="Score" value="@ViewBag.Score" />
+        <!--Value for user input is stored in QuizModel that will be passed into the HttpPost method-->
+        <input type="radio" asp-for="UserAnswer" value="A" /> A. @ViewBag.AnswerA
+        <br />
+        <input type="radio" asp-for="UserAnswer" value="B" /> B. @ViewBag.AnswerB
+        <br />
+        <input type="radio" asp-for="UserAnswer" value="C" /> C. @ViewBag.AnswerC
+        <br />
+        <input type="radio" asp-for="UserAnswer" value="D" /> D. @ViewBag.AnswerD
+        <br />
+        <button type="submit">Submit</button>
+    </form>
+</div>
