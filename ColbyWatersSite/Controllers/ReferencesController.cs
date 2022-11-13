@@ -1,4 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ColbyWatersSite.Models;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ColbyWatersSite.Controllers
 {
@@ -8,5 +15,21 @@ namespace ColbyWatersSite.Controllers
     {
       return View();
     }
+
+    public IActionResult OnlineMedia()
+    {
+      return View();
+    }
+
+    public IActionResult Print()
+    {
+      return View();
+    }
+
+    public IActionResult InternetScams()
+    {
+      return View();
+    }
+
   }
 }

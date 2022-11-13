@@ -1,8 +1,6 @@
 ﻿@{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Internet Scams";
 }
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,13 +22,13 @@
             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Overview">Overview</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Forums">Forums</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Quiz" asp-action="Quiz">QuizPage</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="References" asp-action="References">References</a>
@@ -39,6 +37,6 @@
             </div>
         </nav>
     </header>
-    <p>Welcome to AvoidScams.info</p>
+    <p>Use this page to detail your site's internet scams.</p>
 </body>
 </html>

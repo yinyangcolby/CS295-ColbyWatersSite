@@ -19,15 +19,20 @@ namespace ColbyWatersSite.Controllers
       _logger = logger;
     }
 
-    [HttpGet]
     public IActionResult Index()
+    {
+      return View();
+    }
+
+    [HttpGet]
+    public IActionResult Forums()
     {
       List<ProfileModel> people = PeopleDB.GetPeople();
       ViewBag.people = people;
       return View();
     }
     [HttpPost]
-    public IActionResult Index(ProfileModel model)
+    public IActionResult Forums(ProfileModel model)
     {
 
       if (ModelState.IsValid)
@@ -40,17 +45,12 @@ namespace ColbyWatersSite.Controllers
       return View();
     }
 
+    public IActionResult Overview()
+    {
+      return View();
+    }
+
     public IActionResult Privacy()
-    {
-      return View();
-    }
-
-    public IActionResult References()
-    {
-      return View();
-    }
-
-    public IActionResult ScamsToAvoid()
     {
       return View();
     }
