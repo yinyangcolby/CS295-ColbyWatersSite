@@ -6,43 +6,53 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using PeopleList;
 
 namespace ColbyWatersSite.Controllers
 {
   public class HomeController : Controller
   {
     private readonly ILogger<HomeController> _logger;
+    private CommentDBContext context { get; set; }
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, CommentDBContext ctx)
     {
       _logger = logger;
+      context = ctx;
     }
-
+    
     public IActionResult Index()
     {
       return View();
     }
 
     [HttpGet]
+    public IActionResult AddComment()
+    {
+      return View("AddComment", new CommentModel());
+    }
+
+
+    [HttpGet]
     public IActionResult Forums()
     {
-      List<ProfileModel> people = PeopleDB.GetPeople();
-      ViewBag.people = people;
-      return View();
+      var comments = context.Comments.OrderByDescending(s => s.Date).ToList();
+      return View(comments);
     }
-    [HttpPost]
-    public IActionResult Forums(ProfileModel model)
-    {
 
+    [HttpPost]
+    public IActionResult AddComment(CommentModel model)
+    {
       if (ModelState.IsValid)
       {
-        PeopleDB.AddPerson(model);
-        PeopleDB.SavePeople();
+        model.Date = DateTime.Now.ToString("d");
+        context.Add(model);
+        context.SaveChanges();
+        return RedirectToAction("Forums", "Home");
       }
-      List<ProfileModel> people = PeopleDB.GetPeople();
-      ViewBag.people = people;
-      return View();
+      else
+      {
+        return View(model);
+      }
     }
 
     public IActionResult Overview()

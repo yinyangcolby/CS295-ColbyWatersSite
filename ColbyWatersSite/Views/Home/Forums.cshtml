@@ -1,4 +1,4 @@
-﻿@model ProfileModel
+﻿@model List<CommentModel>
 @{
     ViewData["Title"] = "Forums";
 }
@@ -38,63 +38,27 @@
     </div>
 
 
-    <p>Welcome to the forums. Feel free to leave your feedback and/or discuss things here. (Minimal bootstrap has been added to this page!)</p>
+    <p>Welcome to the forums. Feel free to leave your feedback and/or discuss things here.</p>
     <form asp-action="Forums" method="post">
-        <table>
-            <tr>
-                <td>Name: </td>
-                <!--padding-->
-                <td class="p-2"><input asp-for="Name" /></td>
-            </tr>
-            <tr>
-                <td>Rating (1-10): </td>
-                <td class="p-2"><input style="width: 50px" asp-for="Rating" /></td>
-            </tr>
-            <tr>
-                <td>Comment: </td>
-                <td class="p-2"><textarea asp-for="Comment"></textarea></td>
-            </tr>
-        </table>
         <!--button-->
-        <button type="submit" class="btn btn-success">Add Comment</button>
+        <a asp-controller="Home" asp-action="AddComment" class="btn btn-primary">Leave Feedback</a>
     </form>
 
     <hr />
-    <!--container-->
-    <div class="container">
-        <!--row-->
-        <div class="row">
-            <!--column-->
-            <div class="col-sm">
-                Name
-            </div>
-            <div class="col-sm">
-                Rating
-            </div>
-            <div class="col-sm">
-                Comment
-            </div>
-        </div>
-    </div>
-    <br />
 
-    @foreach (ProfileModel person in (List<ProfileModel>)ViewBag.people)
+    @foreach (CommentModel comment in Model)
     {
-        <div class="container">
-            <div class="row">
-                <div class="col-sm">
-                    @person.Name
-                </div>
-                <div class="col-sm">
-                    @person.Rating / 10
-                </div>
-                <div class="col-sm">
-                    @person.Comment
-                </div>
-            </div>
+        <div class="container p-3 my-3 bg-light">
+            <div><b>@comment.Name says...</b></div>
+            <br>
+            <div><h5>@comment.Comment</h5></div>
+            <div>Rating: @comment.Rating / 10</div>
+            <br>
+            <div><em>@comment.Name posted this on @comment.Date</em></div>
+            <br />
         </div>
-        <br />
     }
+
     <hr />
 
 </body>
