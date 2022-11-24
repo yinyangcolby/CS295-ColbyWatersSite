@@ -6,51 +6,61 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using PeopleList;
 
 namespace ColbyWatersSite.Controllers
 {
   public class HomeController : Controller
   {
     private readonly ILogger<HomeController> _logger;
+    private CommentDBContext context { get; set; }
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, CommentDBContext ctx)
     {
       _logger = logger;
+      context = ctx;
+    }
+    
+    public IActionResult Index()
+    {
+      return View();
     }
 
     [HttpGet]
-    public IActionResult Index()
+    public IActionResult AddComment()
     {
-      List<ProfileModel> people = PeopleDB.GetPeople();
-      ViewBag.people = people;
-      return View();
+      return View("AddComment", new CommentModel());
     }
-    [HttpPost]
-    public IActionResult Index(ProfileModel model)
-    {
 
+
+    [HttpGet]
+    public IActionResult Forums()
+    {
+      var comments = context.Comments.OrderByDescending(s => s.Date).ToList();
+      return View(comments);
+    }
+
+    [HttpPost]
+    public IActionResult AddComment(CommentModel model)
+    {
       if (ModelState.IsValid)
       {
-        PeopleDB.AddPerson(model);
-        PeopleDB.SavePeople();
+        model.Date = DateTime.Now.ToString("d");
+        context.Add(model);
+        context.SaveChanges();
+        return RedirectToAction("Forums", "Home");
       }
-      List<ProfileModel> people = PeopleDB.GetPeople();
-      ViewBag.people = people;
+      else
+      {
+        return View(model);
+      }
+    }
+
+    public IActionResult Overview()
+    {
       return View();
     }
 
     public IActionResult Privacy()
-    {
-      return View();
-    }
-
-    public IActionResult References()
-    {
-      return View();
-    }
-
-    public IActionResult ScamsToAvoid()
     {
       return View();
     }

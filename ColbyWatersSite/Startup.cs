@@ -1,6 +1,8 @@
+using ColbyWatersSite.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,6 +26,14 @@ namespace ColbyWatersSite
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddControllersWithViews();
+      services.AddDbContext<CommentDBContext>(options =>
+          options.UseSqlServer(
+              Configuration.GetConnectionString("StoryContext")));
+      services.AddRouting(options =>
+      {
+        options.LowercaseUrls = true;
+        options.AppendTrailingSlash = true;
+      });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

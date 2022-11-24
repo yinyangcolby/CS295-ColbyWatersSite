@@ -1,0 +1,65 @@
+﻿@model List<CommentModel>
+@{
+    ViewData["Title"] = "Forums";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ColbyWatersSite</title>
+    <style></style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AvoidScams.info</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+            </div>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Overview">Overview</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!--jumbotron & margin (mx-auto)-->
+    <div class="mx-auto" style="width: 200px;">
+        <h1 class="jumbotron">Forums</h1>
+    </div>
+
+
+    <p>Welcome to the forums. Feel free to leave your feedback and/or discuss things here.</p>
+    <form asp-action="Forums" method="post">
+        <!--button-->
+        <a asp-controller="Home" asp-action="AddComment" class="btn btn-primary">Leave Feedback</a>
+    </form>
+
+    <hr />
+
+    @foreach (CommentModel comment in Model)
+    {
+        <div class="container p-3 my-3 bg-light">
+            <div><b>@comment.Name says...</b></div>
+            <br>
+            <div><h5>@comment.Comment</h5></div>
+            <div>Rating: @comment.Rating / 10</div>
+            <br>
+            <div><em>@comment.Name posted this on @comment.Date</em></div>
+            <br />
+        </div>
+    }
+
+    <hr />
+
+</body>
+</html>
