@@ -1,0 +1,28 @@
+﻿@model CommentModel
+@{
+    ViewData["Title"] = "Send feedback";
+}
+
+<h1>Enter your feedback here:</h1>
+<form asp-action="AddComment" method="post" class="form-horizontal">
+    <div class="row m-2">
+        <label asp-for="Name" class="control-label col-3">Your Name:</label>
+        <input asp-for="Name" class="form-control col-3" />
+        <span asp-validation-for="@Model.Name" class="text-danger col"></span>
+    </div>
+
+    <div class="row m-2">
+        <label asp-for="Rating" class="control-label col-3">Rating:</label>
+        <input asp-for="Rating" class="form-control col-3" />
+        <span asp-validation-for="@Model.Rating" class="text-danger col"></span>
+    </div>
+
+    <div class="row m-2">
+        <label asp-for="Comment" class="control-label col-3">Comment:</label>
+        <textarea asp-for="Comment" class="form-control   col-3"></textarea>
+        <span asp-validation-for="@Model.Comment" class="text-danger col"></span>
+    </div>
+    <div class="row m-2">
+        <button type="submit" class="btn btn-primary m-1 p-2">Post</button>
+    </div>
+</form>
