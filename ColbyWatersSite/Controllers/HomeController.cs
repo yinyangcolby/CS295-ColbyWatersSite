@@ -19,7 +19,11 @@ namespace ColbyWatersSite.Controllers
       _logger = logger;
       context = ctx;
     }
-    
+
+    private IRepository<CommentModel> comments { get; set; }
+
+    public HomeController(IRepository<CommentModel> rep) => comments = rep;
+
     public IActionResult Index()
     {
       return View();
@@ -35,8 +39,8 @@ namespace ColbyWatersSite.Controllers
     [HttpGet]
     public IActionResult Forums()
     {
-      var comments = context.Comments.OrderByDescending(s => s.Date).ToList();
-      return View(comments);
+      var options = new QueryOptions<CommentModel> { OrderByDescending = s => s.Date };
+      return View(comments.List(options));
     }
 
     [HttpPost]

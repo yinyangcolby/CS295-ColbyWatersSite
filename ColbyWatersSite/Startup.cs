@@ -26,6 +26,9 @@ namespace ColbyWatersSite
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddControllersWithViews();
+
+      services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+
       services.AddDbContext<CommentDBContext>(options =>
           options.UseSqlServer(
               Configuration.GetConnectionString("StoryContext")));
