@@ -14,15 +14,14 @@ namespace ColbyWatersSite.Controllers
     private readonly ILogger<HomeController> _logger;
     private CommentDBContext context { get; set; }
 
-    public HomeController(ILogger<HomeController> logger, CommentDBContext ctx)
+    public HomeController(ILogger<HomeController> logger, CommentDBContext ctx, IRepository<CommentModel> rep)
     {
       _logger = logger;
       context = ctx;
+      comments = rep;
     }
 
     private IRepository<CommentModel> comments { get; set; }
-
-    public HomeController(IRepository<CommentModel> rep) => comments = rep;
 
     public IActionResult Index()
     {
